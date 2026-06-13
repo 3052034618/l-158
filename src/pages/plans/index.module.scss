@@ -1,0 +1,270 @@
+@use '@/styles/variables.scss' as *;
+
+.pageContainer {
+  min-height: 100vh;
+  background-color: $color-bg-page;
+  padding-bottom: $spacing-xl;
+}
+
+.header {
+  padding: $spacing-lg $page-padding;
+  background: linear-gradient(135deg, $color-secondary 0%, $color-secondary-light 100%);
+}
+
+.pageTitle {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: $spacing-md;
+}
+
+.todayCard {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  backdrop-filter: blur(10rpx);
+}
+
+.todayLabel {
+  font-size: $font-size-sm;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: $spacing-xs;
+}
+
+.todayPlanName {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  color: $color-text-white;
+  margin-bottom: $spacing-sm;
+}
+
+.todayMeta {
+  display: flex;
+  gap: $spacing-lg;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: $font-size-sm;
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  padding: $spacing-lg $page-padding $spacing-sm;
+}
+
+.planList {
+  padding: 0 $page-padding;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.planCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  transition: all $transition-base;
+}
+
+.planHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg;
+  cursor: pointer;
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.planInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.planName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+  @include text-ellipsis;
+}
+
+.planMeta {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+}
+
+.ageTag {
+  @include flex-center;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-xs;
+  background: rgba(46, 134, 171, 0.1);
+  color: $color-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.planDate {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.planDuration {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.expandIcon {
+  font-size: $font-size-lg;
+  color: $color-text-tertiary;
+  margin-left: $spacing-sm;
+  transition: transform $transition-base;
+}
+
+.expandIconActive {
+  transform: rotate(180deg);
+}
+
+.planDetails {
+  border-top: 1rpx solid $color-divider;
+  padding: $spacing-lg;
+  background: $color-bg-page;
+}
+
+.coachInfo {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-md;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.itemCard {
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  border-left: 6rpx solid transparent;
+}
+
+.itemWarmup {
+  border-left-color: $color-warmup;
+}
+
+.itemSpeed {
+  border-left-color: $color-speed;
+}
+
+.itemStrength {
+  border-left-color: $color-strength;
+}
+
+.itemFlexibility {
+  border-left-color: $color-flexibility;
+}
+
+.itemRecovery {
+  border-left-color: $color-recovery;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.itemName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.categoryTag {
+  @include flex-center;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-xs;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $color-text-white;
+}
+
+.categoryWarmup {
+  background: $color-warmup;
+}
+
+.categorySpeed {
+  background: $color-speed;
+}
+
+.categoryStrength {
+  background: $color-strength;
+}
+
+.categoryFlexibility {
+  background: $color-flexibility;
+}
+
+.categoryRecovery {
+  background: $color-recovery;
+}
+
+.itemParams {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  margin-bottom: $spacing-sm;
+}
+
+.paramItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.paramValue {
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.heartRate {
+  color: $color-error;
+}
+
+.itemDesc {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  line-height: $line-height-normal;
+}
+
+.emptyState {
+  @include flex-center;
+  flex-direction: column;
+  padding: $spacing-xl * 2;
+  color: $color-text-tertiary;
+}
+
+.emptyIcon {
+  font-size: 80rpx;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+}

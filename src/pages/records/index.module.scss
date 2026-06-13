@@ -1,0 +1,259 @@
+@use '@/styles/variables.scss' as *;
+
+.pageContainer {
+  min-height: 100vh;
+  background-color: $color-bg-page;
+  padding-bottom: $spacing-xl;
+}
+
+.header {
+  padding: $spacing-lg $page-padding;
+  background: linear-gradient(135deg, $color-warmup 0%, $color-primary-light 100%);
+}
+
+.pageTitle {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+  margin-bottom: $spacing-md;
+}
+
+.summaryCard {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+}
+
+.summaryStats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.statBlock {
+  @include flex-center;
+  flex-direction: column;
+}
+
+.statValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+}
+
+.statLabel {
+  font-size: $font-size-xs;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: $spacing-xs;
+}
+
+.section {
+  padding: $spacing-lg $page-padding;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.actionBtn {
+  @include button-reset;
+  padding: $spacing-sm $spacing-md;
+  background: $color-primary;
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.recordList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.recordCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-card;
+  overflow: hidden;
+}
+
+.recordHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.recordTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.recordDate {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.recordContent {
+  padding: $spacing-lg;
+}
+
+.attendanceSection {
+  margin-bottom: $spacing-lg;
+}
+
+.subTitle {
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.attendanceList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.attendanceItem {
+  display: flex;
+  align-items: center;
+  gap: $spacing-xs;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+}
+
+.statusPresent {
+  background: rgba(0, 180, 42, 0.1);
+  color: $color-success;
+}
+
+.statusLate {
+  background: rgba(255, 125, 0, 0.1);
+  color: $color-warning;
+}
+
+.statusInjured {
+  background: rgba(245, 63, 63, 0.1);
+  color: $color-error;
+}
+
+.statusAbsent {
+  background: rgba(134, 144, 156, 0.1);
+  color: $color-text-tertiary;
+}
+
+.statusDot {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: $radius-round;
+}
+
+.dotPresent {
+  background: $color-success;
+}
+
+.dotLate {
+  background: $color-warning;
+}
+
+.dotInjured {
+  background: $color-error;
+}
+
+.dotAbsent {
+  background: $color-text-tertiary;
+}
+
+.reasonTag {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-left: $spacing-xs;
+}
+
+.performanceSection {
+  margin-bottom: $spacing-md;
+}
+
+.perfTable {
+  background: $color-bg-page;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+.perfHeader {
+  display: flex;
+  background: $color-bg-hover;
+  padding: $spacing-sm $spacing-md;
+}
+
+.perfHeaderCell {
+  flex: 1;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+}
+
+.perfRow {
+  display: flex;
+  padding: $spacing-sm $spacing-md;
+  border-top: 1rpx solid $color-divider;
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.perfCell {
+  flex: 1;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.perfScore {
+  font-weight: $font-weight-semibold;
+  color: $color-primary;
+}
+
+.recordNote {
+  padding: $spacing-sm $spacing-md;
+  background: rgba(255, 125, 0, 0.05);
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-warning;
+  line-height: $line-height-normal;
+}
+
+.emptyState {
+  @include flex-center;
+  flex-direction: column;
+  padding: $spacing-xl * 2;
+  color: $color-text-tertiary;
+}
+
+.emptyIcon {
+  font-size: 80rpx;
+  margin-bottom: $spacing-md;
+}
+
+.emptyText {
+  font-size: $font-size-md;
+}
