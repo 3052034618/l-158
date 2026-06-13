@@ -11,11 +11,33 @@
   background: linear-gradient(135deg, $color-secondary 0%, $color-secondary-light 100%);
 }
 
+.headerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
 .pageTitle {
   font-size: $font-size-xxl;
   font-weight: $font-weight-bold;
   color: $color-text-white;
-  margin-bottom: $spacing-md;
+}
+
+.addPlanBtn {
+  @include button-reset;
+  padding: $spacing-sm $spacing-md;
+  background: $color-text-white;
+  border-radius: $radius-button;
+  color: $color-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
 }
 
 .todayCard {
@@ -78,7 +100,6 @@
   align-items: center;
   justify-content: space-between;
   padding: $spacing-lg;
-  cursor: pointer;
 
   &:active {
     background: $color-bg-hover;
@@ -125,10 +146,31 @@
   color: $color-text-secondary;
 }
 
+.planActions {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-left: $spacing-sm;
+}
+
+.editBtn {
+  @include button-reset;
+  padding: $spacing-xs $spacing-md;
+  background: rgba(46, 134, 171, 0.1);
+  border-radius: $radius-button;
+  color: $color-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  white-space: nowrap;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
 .expandIcon {
   font-size: $font-size-lg;
   color: $color-text-tertiary;
-  margin-left: $spacing-sm;
   transition: transform $transition-base;
 }
 
@@ -142,6 +184,25 @@
   background: $color-bg-page;
 }
 
+.detailActions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $spacing-md;
+}
+
+.deleteBtn {
+  @include button-reset;
+  padding: $spacing-xs $spacing-md;
+  background: rgba(245, 63, 63, 0.1);
+  border-radius: $radius-button;
+  color: $color-error;
+  font-size: $font-size-xs;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
 .coachInfo {
   font-size: $font-size-sm;
   color: $color-text-secondary;
@@ -152,6 +213,13 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-sm;
+}
+
+.emptyItems {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  text-align: center;
+  padding: $spacing-lg;
 }
 
 .itemCard {
@@ -267,4 +335,308 @@
 
 .emptyText {
   font-size: $font-size-md;
+}
+
+/* ============================================
+   Plan Editor Styles
+   ============================================ */
+
+.editorMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.editorPanel {
+  width: 100%;
+  max-height: 92vh;
+  background: $color-bg-card;
+  border-radius: $radius-xl $radius-xl 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editorHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg;
+  border-bottom: 1rpx solid $color-divider;
+  flex-shrink: 0;
+}
+
+.editorTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.editorClose {
+  font-size: $font-size-xl;
+  color: $color-text-tertiary;
+  padding: $spacing-xs;
+}
+
+.editorBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-lg $page-padding;
+}
+
+.formSection {
+  margin-bottom: $spacing-xl;
+}
+
+.formRow {
+  margin-bottom: $spacing-md;
+}
+
+.formLabel {
+  display: block;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.formInput {
+  width: 100%;
+  height: 80rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+.formPicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+}
+
+.pickerArrow {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.sectionHeader {
+  margin-bottom: $spacing-md;
+}
+
+.sectionTitleInner {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.editorItems {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.catGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.catHeader {
+  @include flex-center;
+  align-self: flex-start;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $spacing-xs;
+}
+
+.editorItemCard {
+  background: $color-bg-page;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+  border-left: 6rpx solid transparent;
+}
+
+.editorItemHeader {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+}
+
+.editorItemName {
+  flex: 1;
+  height: 72rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+.removeItemBtn {
+  @include flex-center;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(245, 63, 63, 0.1);
+  border-radius: $radius-xs;
+  color: $color-error;
+  font-size: $font-size-xs;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.editorItemParams {
+  display: flex;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-sm;
+  flex-wrap: wrap;
+}
+
+.paramCol {
+  flex: 1;
+  min-width: 140rpx;
+}
+
+.paramLabel {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-bottom: $spacing-xs;
+}
+
+.paramInput {
+  width: 100%;
+  height: 64rpx;
+  padding: 0 $spacing-sm;
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.editorItemDesc {
+  width: 100%;
+  min-height: 72rpx;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-card;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+.addItemSection {
+  padding-top: $spacing-md;
+  border-top: 1rpx dashed $color-border;
+}
+
+.addItemBtns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.addCatBtn {
+  @include button-reset;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+
+  &:active {
+    opacity: 0.85;
+  }
+}
+
+.addItemConfirm {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+}
+
+.confirmYes {
+  @include button-reset;
+  padding: $spacing-xs $spacing-md;
+  background: $color-primary;
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+}
+
+.confirmNo {
+  @include button-reset;
+  padding: $spacing-xs $spacing-md;
+  background: $color-bg-hover;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-sm;
+}
+
+.editorFooter {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg $page-padding;
+  padding-bottom: calc($spacing-lg + env(safe-area-inset-bottom, 0));
+  border-top: 1rpx solid $color-divider;
+  background: $color-bg-card;
+  flex-shrink: 0;
+}
+
+.cancelBtn {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-lg;
+  background: $color-bg-hover;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.saveBtn {
+  @include button-reset;
+  flex: 1.5;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.99);
+  }
 }

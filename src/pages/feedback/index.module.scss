@@ -11,6 +11,13 @@
   background: linear-gradient(135deg, $color-flexibility 0%, $color-secondary 100%);
 }
 
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: $spacing-md;
+}
+
 .pageTitle {
   font-size: $font-size-xxl;
   font-weight: $font-weight-bold;
@@ -18,11 +25,10 @@
   margin-bottom: $spacing-sm;
 }
 
-.headerStats {
+.headerStatsRow {
   display: flex;
   align-items: center;
-  gap: $spacing-md;
-  margin-bottom: $spacing-md;
+  gap: $spacing-sm;
 }
 
 .unreadBadge {
@@ -38,6 +44,20 @@
 .headerDesc {
   font-size: $font-size-sm;
   color: rgba(255, 255, 255, 0.85);
+}
+
+.sendBtn {
+  @include button-reset;
+  padding: $spacing-sm $spacing-md;
+  background: $color-text-white;
+  border-radius: $radius-button;
+  color: $color-secondary;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+  }
 }
 
 .filterScroll {
@@ -76,6 +96,8 @@
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
+  max-height: calc(100vh - 360rpx);
+  overflow-y: auto;
 }
 
 .feedbackCard {
@@ -151,6 +173,7 @@
   border-radius: $radius-round;
   background: $color-error;
   flex-shrink: 0;
+  margin-top: $spacing-xs;
 }
 
 .feedbackTitle {
@@ -195,6 +218,7 @@
   flex-direction: column;
   padding: $spacing-xl * 2;
   color: $color-text-tertiary;
+  text-align: center;
 }
 
 .emptyIcon {
@@ -204,4 +228,414 @@
 
 .emptyText {
   font-size: $font-size-md;
+}
+
+/* ============ Composer Modal ============ */
+
+.composerMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.composerPanel {
+  width: 100%;
+  max-height: 92vh;
+  background: $color-bg-card;
+  border-radius: $radius-xl $radius-xl 0 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.composerHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg;
+  border-bottom: 1rpx solid $color-divider;
+  flex-shrink: 0;
+}
+
+.composerTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+}
+
+.composerClose {
+  font-size: $font-size-xl;
+  color: $color-text-tertiary;
+  padding: $spacing-xs;
+}
+
+.modeTabs {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-md $page-padding;
+  border-bottom: 1rpx solid $color-divider;
+  background: $color-bg-page;
+  flex-shrink: 0;
+}
+
+.modeTab {
+  flex: 1;
+  @include flex-center;
+  padding: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  border: 2rpx solid transparent;
+  font-weight: $font-weight-medium;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.modeTabActive {
+  background: rgba(255, 107, 53, 0.08);
+  color: $color-primary;
+  border-color: $color-primary;
+  font-weight: $font-weight-semibold;
+}
+
+.composerBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: $spacing-lg $page-padding;
+  padding-bottom: calc($spacing-xl + env(safe-area-inset-bottom, 0));
+}
+
+.formBlock {
+  margin-bottom: $spacing-xl;
+}
+
+.formBlockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.formBlockTitle {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-sm;
+}
+
+.selectBtns {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-sm;
+}
+
+.selectLink {
+  font-size: $font-size-sm;
+  color: $color-secondary;
+  font-weight: $font-weight-medium;
+  padding: $spacing-xs 0;
+}
+
+/* Record Picker */
+
+.recordPickerList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  max-height: 400rpx;
+  overflow-y: auto;
+}
+
+.recordOption {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid transparent;
+  border-radius: $radius-md;
+  transition: all $transition-base;
+
+  &:active {
+    background: $color-bg-hover;
+  }
+}
+
+.recordOptionActive {
+  background: rgba(46, 134, 171, 0.08);
+  border-color: $color-secondary;
+}
+
+.roName {
+  display: block;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: 4rpx;
+}
+
+.roDate {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.roCheck {
+  width: 48rpx;
+  height: 48rpx;
+  @include flex-center;
+  background: $color-secondary;
+  border-radius: $radius-round;
+  color: $color-text-white;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
+  flex-shrink: 0;
+}
+
+/* Member Picker */
+
+.memberPickerList {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+}
+
+.memberOption {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid transparent;
+  border-radius: $radius-sm;
+  transition: all $transition-base;
+}
+
+.memberOptionActive {
+  background: rgba(255, 107, 53, 0.08);
+  border-color: $color-primary;
+}
+
+.checkBox {
+  width: 36rpx;
+  height: 36rpx;
+  @include flex-center;
+  border: 2rpx solid $color-border;
+  border-radius: 6rpx;
+  font-size: $font-size-xs;
+  color: $color-text-white;
+  flex-shrink: 0;
+}
+
+.checkBoxActive {
+  background: $color-primary;
+  border-color: $color-primary;
+  font-weight: $font-weight-bold;
+}
+
+.moName {
+  flex: 1;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.moAge {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  flex-shrink: 0;
+}
+
+.selectedCount {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  text-align: center;
+  margin-top: $spacing-sm;
+}
+
+/* Summary Editor */
+
+.summaryEditor {
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  padding: $spacing-md;
+}
+
+.summaryInput {
+  width: 100%;
+  min-height: 200rpx;
+  background: transparent;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  line-height: $line-height-normal;
+  box-sizing: border-box;
+}
+
+/* Type Options */
+
+.typeOptions {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.typeOption {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-lg $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid transparent;
+  border-radius: $radius-md;
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.typeOptionActive {
+  border-color: $color-secondary;
+  background: rgba(46, 134, 171, 0.05);
+}
+
+.typeOptNotice.typeOptionActive {
+  border-color: $color-warning;
+  background: rgba(255, 125, 0, 0.08);
+}
+
+.typeOptEquipment.typeOptionActive {
+  border-color: $color-success;
+  background: rgba(0, 180, 42, 0.08);
+}
+
+.toIcon {
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.toLabel {
+  flex: 1;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.toCheck {
+  color: $color-success;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-lg;
+}
+
+/* Form Elements */
+
+.formPicker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 88rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+}
+
+.placeholderStyle {
+  color: $color-text-tertiary;
+}
+
+.pickerArrow {
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.formInput {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+.formTextarea {
+  width: 100%;
+  min-height: 200rpx;
+  padding: $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+  line-height: $line-height-normal;
+}
+
+.emptySmall {
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+  background: $color-bg-page;
+  border-radius: $radius-md;
+}
+
+/* ============ Composer Footer ============ */
+
+.composerFooter {
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-lg $page-padding;
+  padding-bottom: calc($spacing-lg + env(safe-area-inset-bottom, 0));
+  border-top: 1rpx solid $color-divider;
+  background: $color-bg-card;
+  flex-shrink: 0;
+}
+
+.cancelBtn {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-lg;
+  background: $color-bg-hover;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.sendFinalBtn {
+  @include button-reset;
+  flex: 2;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-secondary 0%, $color-secondary-light 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.99);
+  }
 }

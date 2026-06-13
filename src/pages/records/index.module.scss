@@ -3,7 +3,7 @@
 .pageContainer {
   min-height: 100vh;
   background-color: $color-bg-page;
-  padding-bottom: $spacing-xl;
+  padding-bottom: calc($spacing-xl + env(safe-area-inset-bottom, 0));
 }
 
 .header {
@@ -27,6 +27,7 @@
 .summaryStats {
   display: flex;
   justify-content: space-around;
+  margin-bottom: $spacing-md;
 }
 
 .statBlock {
@@ -46,36 +47,30 @@
   margin-top: $spacing-xs;
 }
 
-.section {
-  padding: $spacing-lg $page-padding;
+.newRecordBtn {
+  @include button-reset;
+  width: 100%;
+  height: $button-height-md;
+  background: $color-text-white;
+  border-radius: $radius-button;
+  color: $color-primary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-bold;
+
+  &:active {
+    opacity: 0.9;
+  }
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: $spacing-md;
+.section {
+  padding: $spacing-lg $page-padding 0;
 }
 
 .sectionTitle {
   font-size: $font-size-lg;
   font-weight: $font-weight-semibold;
   color: $color-text-primary;
-}
-
-.actionBtn {
-  @include button-reset;
-  padding: $spacing-sm $spacing-md;
-  background: $color-primary;
-  border-radius: $radius-button;
-  color: $color-text-white;
-  font-size: $font-size-sm;
-  transition: all $transition-base;
-
-  &:active {
-    opacity: 0.9;
-    transform: scale(0.98);
-  }
+  margin-bottom: $spacing-md;
 }
 
 .recordList {
@@ -164,6 +159,7 @@
   width: 12rpx;
   height: 12rpx;
   border-radius: $radius-round;
+  flex-shrink: 0;
 }
 
 .dotPresent {
@@ -184,7 +180,8 @@
 
 .reasonTag {
   font-size: $font-size-xs;
-  color: $color-text-tertiary;
+  color: inherit;
+  opacity: 0.8;
   margin-left: $spacing-xs;
 }
 
@@ -215,10 +212,6 @@
   display: flex;
   padding: $spacing-sm $spacing-md;
   border-top: 1rpx solid $color-divider;
-
-  &:first-child {
-    border-top: none;
-  }
 }
 
 .perfCell {
@@ -247,6 +240,7 @@
   flex-direction: column;
   padding: $spacing-xl * 2;
   color: $color-text-tertiary;
+  text-align: center;
 }
 
 .emptyIcon {
@@ -256,4 +250,585 @@
 
 .emptyText {
   font-size: $font-size-md;
+}
+
+/* ================= Step Bar Styles ================ */
+
+.stepperHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-lg $page-padding;
+  background: $color-bg-card;
+  border-bottom: 1rpx solid $color-divider;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.stepBack {
+  font-size: $font-size-md;
+  color: $color-secondary;
+  padding: $spacing-xs;
+  width: 80rpx;
+}
+
+.stepTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+/* ============ Plan Picker ============= */
+
+.planPickerList {
+  padding: $spacing-lg $page-padding;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  max-height: calc(100vh - 120rpx);
+  overflow-y: auto;
+}
+
+.planPickerCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  border-left: 6rpx solid $color-secondary;
+
+  &:active {
+    transform: scale(0.99);
+    box-shadow: $shadow-card-hover;
+  }
+}
+
+.ppTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $spacing-sm;
+}
+
+.ppName {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  @include text-ellipsis;
+  flex: 1;
+}
+
+.ageTag {
+  @include flex-center;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $radius-xs;
+  background: rgba(46, 134, 171, 0.1);
+  color: $color-secondary;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  flex-shrink: 0;
+  margin-left: $spacing-sm;
+}
+
+.ppMeta {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+.ppDate {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+}
+
+/* ========= Plan Summary ========= */
+
+.planSummary {
+  padding: $spacing-md $page-padding;
+  background: linear-gradient(135deg, rgba(46, 134, 171, 0.1) 0%, rgba(46, 134, 171, 0.05) 100%);
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.planSumName {
+  display: block;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-secondary;
+  margin-bottom: $spacing-xs;
+}
+
+.planSumSub {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+/* ========= Attendance Stats Bar ========= */
+
+.attendanceStatsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: $spacing-md $page-padding;
+  background: $color-bg-card;
+  border-bottom: 1rpx solid $color-divider;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.asbItem {
+  @include flex-center;
+  flex-direction: column;
+  flex: 1;
+  min-width: 80rpx;
+}
+
+.asbNum {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+}
+
+.asbLbl {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: 2rpx;
+}
+
+.markAllBtn {
+  @include button-reset;
+  padding: $spacing-xs $spacing-md;
+  background: rgba(0, 180, 42, 0.1);
+  border-radius: $radius-button;
+  color: $color-success;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  flex-shrink: 0;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+/* ========= Attendance Form List ========= */
+
+.attendanceFormList {
+  padding: $spacing-md $page-padding;
+  padding-bottom: 220rpx;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  max-height: calc(100vh - 500rpx);
+  overflow-y: auto;
+}
+
+.attendanceRow {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.arMember {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-bottom: $spacing-sm;
+}
+
+.arAvatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: $radius-round;
+  background: $color-bg-hover;
+  flex-shrink: 0;
+}
+
+.arName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.arReasonPreview {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  margin-left: $spacing-xs;
+}
+
+.arStatusBtns {
+  display: flex;
+  gap: $spacing-sm;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-sm;
+}
+
+.statusChip {
+  @include flex-center;
+  padding: $spacing-xs $spacing-md;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  flex: 1;
+  min-width: 100rpx;
+
+  &.statusPresent {
+    background: $color-success;
+    color: $color-text-white;
+  }
+  &.statusLate {
+    background: $color-warning;
+    color: $color-text-white;
+  }
+  &.statusInjured {
+    background: $color-error;
+    color: $color-text-white;
+  }
+  &.statusAbsent {
+    background: $color-text-tertiary;
+    color: $color-text-white;
+  }
+}
+
+.statusChipOff {
+  background: $color-bg-hover;
+  color: $color-text-secondary;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.editReasonBtn {
+  @include button-reset;
+  padding: $spacing-xs $spacing-sm;
+  background: rgba(255, 125, 0, 0.1);
+  border-radius: $radius-xs;
+  color: $color-warning;
+  font-size: $font-size-xs;
+  align-self: flex-end;
+}
+
+/* ========= Score Page ========= */
+
+.scoreItemTabs {
+  width: 100%;
+  background: $color-bg-card;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.scoreItemTabsInner {
+  display: flex;
+  gap: $spacing-sm;
+  padding: $spacing-md $page-padding;
+}
+
+.scoreItemTab {
+  @include flex-center;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-hover;
+  border-radius: $radius-button;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  white-space: nowrap;
+  border: 2rpx solid transparent;
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.scoreItemTabActive {
+  background: rgba(255, 107, 53, 0.1);
+  color: $color-primary;
+  font-weight: $font-weight-semibold;
+  border-color: $color-primary;
+}
+
+.scoreProgress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacing-md $page-padding;
+  background: $color-bg-card;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.scoreListHint {
+  padding: $spacing-sm $page-padding;
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  background: $color-bg-page;
+}
+
+.scoreInputList {
+  padding: $spacing-md $page-padding;
+  padding-bottom: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  max-height: calc(100vh - 620rpx);
+  overflow-y: auto;
+}
+
+.scoreRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-md;
+  box-shadow: $shadow-card;
+}
+
+.srAvatar {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: $radius-round;
+  background: $color-bg-hover;
+  flex-shrink: 0;
+}
+
+.srName {
+  flex: 1;
+  font-size: $font-size-md;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+  @include text-ellipsis;
+}
+
+.srInput {
+  width: 180rpx;
+  height: 72rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-md;
+  color: $color-primary;
+  font-weight: $font-weight-semibold;
+  text-align: right;
+  box-sizing: border-box;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+.srUnit {
+  width: 80rpx;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  text-align: left;
+}
+
+.batchScoreBar {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  padding: $spacing-sm $page-padding;
+  background: $color-bg-card;
+  border-top: 1rpx solid $color-divider;
+}
+
+.batchLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  flex-shrink: 0;
+}
+
+.batchInput {
+  width: 200rpx;
+  height: 64rpx;
+  padding: 0 $spacing-md;
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.emptySmall {
+  padding: $spacing-xl;
+  text-align: center;
+  color: $color-text-tertiary;
+  font-size: $font-size-sm;
+}
+
+.emptyBig {
+  padding: $spacing-xl * 2 $page-padding;
+  text-align: center;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+}
+
+/* ========= Note Section ========= */
+
+.noteSection {
+  padding: $spacing-md $page-padding;
+  background: $color-bg-card;
+  border-top: 1rpx solid $color-divider;
+  margin-top: $spacing-md;
+}
+
+.noteLabel {
+  display: block;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.noteInput {
+  width: 100%;
+  min-height: 80rpx;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-page;
+  border: 1rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+}
+
+/* ========= Bottom Bar ========= */
+
+.bottomBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: $spacing-md;
+  padding: $spacing-md $page-padding;
+  padding-bottom: calc($spacing-md + env(safe-area-inset-bottom, 0));
+  background: $color-bg-card;
+  border-top: 1rpx solid $color-divider;
+  box-shadow: 0 -2rpx 12rpx rgba(0, 0, 0, 0.05);
+  z-index: 100;
+}
+
+.stepCancel {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-lg;
+  background: $color-bg-hover;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.stepNext {
+  @include button-reset;
+  flex: 2;
+  height: $button-height-lg;
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-light 100%);
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.99);
+  }
+}
+
+/* ========= Reason Modal ========= */
+
+.reasonMask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  @include flex-center;
+  padding: $page-padding;
+}
+
+.reasonPanel {
+  width: 100%;
+  max-width: 600rpx;
+  background: $color-bg-card;
+  border-radius: $radius-xl;
+  padding: $spacing-xl;
+}
+
+.reasonTitle {
+  display: block;
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-xs;
+  text-align: center;
+}
+
+.reasonName {
+  display: block;
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-lg;
+  text-align: center;
+}
+
+.reasonInput {
+  width: 100%;
+  height: 96rpx;
+  padding: $spacing-sm $spacing-md;
+  background: $color-bg-page;
+  border: 2rpx solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  box-sizing: border-box;
+  margin-bottom: $spacing-lg;
+}
+
+.reasonBtns {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.reasonCancel {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-md;
+  background: $color-bg-hover;
+  border-radius: $radius-button;
+  color: $color-text-secondary;
+  font-size: $font-size-md;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.reasonConfirm {
+  @include button-reset;
+  flex: 1;
+  height: $button-height-md;
+  background: $color-primary;
+  border-radius: $radius-button;
+  color: $color-text-white;
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+/* ========= Utility Classes ========= */
+
+.Image {
+  display: block;
 }
